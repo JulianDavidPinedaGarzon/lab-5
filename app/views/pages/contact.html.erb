@@ -1,0 +1,24 @@
+<div class="text-center">
+  <h1>Contáctame</h1>
+  <p>Completa el siguiente formulario y me pondre en contacto contigo.</p>
+  
+  <%= form_with url: "/contact", method: :post, local: true do |f| %>
+    <div class="mb-3">
+      <%= f.label :name, "Nombre" %>
+      <%= f.text_field :name, class: "form-control", required: true %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :email, "Correo Electrónico" %>
+      <%= f.email_field :email, class: "form-control", required: true %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :message, "Mensaje" %>
+      <%= f.text_area :message, class: "form-control", rows: 5, required: true %>
+    </div>
+    <%= f.submit "Enviar", class: "btn btn-primary" %>
+  <% end %>
+
+  <% if flash[:notice] %>
+    <div class="alert alert-success mt-3"><%= flash[:notice] %></div>
+  <% end %>
+</div>
