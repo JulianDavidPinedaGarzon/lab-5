@@ -65,3 +65,7 @@ group :test do
 end
 
 gem "bootstrap", "~> 5.3"
+
+group :development, :test do
+  gem 'faker'
+end
