@@ -1,9 +1,8 @@
-# Borrar datos anteriores por si corres varias veces el seed
 Message.delete_all
 Chat.delete_all
 User.delete_all
 
-# Crear usuarios
+
 users = 10.times.map do
   User.create!(
     email: Faker::Internet.email,
@@ -12,7 +11,7 @@ users = 10.times.map do
   )
 end
 
-# Crear chats entre usuarios aleatorios
+
 chats = 10.times.map do
   sender, receiver = users.sample(2)
   Chat.create!(
@@ -21,7 +20,6 @@ chats = 10.times.map do
   )
 end
 
-# Crear mensajes aleatorios en los chats
 10.times do
   chat = chats.sample
   user = users.sample
