@@ -1,0 +1,19 @@
+<h1>All Messages</h1>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Chat ID</th>
+    <th>User ID</th>
+    <th>Body</th>
+    <th>Actions</th>
+  </tr>
+  <% @messages.each do |msg| %>
+    <tr>
+      <td><%= msg.id %></td>
+      <td><%= msg.chat_id %></td>
+      <td><%= msg.user_id %></td>
+      <td><%= msg.body %></td>
+      <td><%= link_to "View", message_path(msg) %></td>
+    </tr>
+  <% end %>
+</table>

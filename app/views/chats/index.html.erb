@@ -1,0 +1,17 @@
+<h1>All Chats</h1>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Sender ID</th>
+    <th>Receiver ID</th>
+    <th>Actions</th>
+  </tr>
+  <% @chats.each do |chat| %>
+    <tr>
+      <td><%= chat.id %></td>
+      <td><%= chat.sender_id %></td>
+      <td><%= chat.receiver_id %></td>
+      <td><%= link_to "View", chat_path(chat) %></td>
+    </tr>
+  <% end %>
+</table>
