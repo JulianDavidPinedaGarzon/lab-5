@@ -6,6 +6,7 @@
     <th>First Name</th>
     <th>Last Name</th>
     <th>Actions</th>
+    <th>Count</th>
   </tr>
   <% @users.each do |user| %>
     <tr>
@@ -14,6 +15,8 @@
       <td><%= user.first_name %></td>
       <td><%= user.last_name %></td>
       <td><%= link_to "View", user_path(user) %></td>
+      <td><%= user.messages.count %></td>
+      <td><%= link_to 'Editar', edit_user_path(user) %></td>
     </tr>
   <% end %>
 </table>

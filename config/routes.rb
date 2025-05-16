@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   resources :chats
   resources :messages
 
-  root "users#index"
+  root 'pages#home'
+
 end

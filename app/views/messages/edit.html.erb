@@ -1,0 +1,16 @@
+<h1>Editar Mensaje</h1>
+
+<%= form_with model: @message do |f| %>
+  <% if @message.errors.any? %>
+    <ul>
+      <% @message.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= f.label :body %>
+  <%= f.text_area :body %>
+
+  <%= f.submit "Actualizar" %>
+<% end %>

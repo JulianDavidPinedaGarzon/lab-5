@@ -14,3 +14,14 @@
 <% @chat.errors.full_messages.each do |msg| %>
   <p><%= msg %></p>
 <% end %>
+
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> impidieron guardar el usuario:</h2>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

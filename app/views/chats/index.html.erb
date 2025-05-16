@@ -12,6 +12,8 @@
       <td><%= chat.sender_id %></td>
       <td><%= chat.receiver_id %></td>
       <td><%= link_to "View", chat_path(chat) %></td>
+      <td><%= link_to 'Editar', edit_chat_path(chat) %></td>
     </tr>
   <% end %>
 </table>
+
