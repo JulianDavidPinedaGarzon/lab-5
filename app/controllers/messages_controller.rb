@@ -1,4 +1,7 @@
 class MessagesController < ApplicationController
+  before_action :authenticate_user!
+  authorize_resource
+  
   def index
     @messages = Message.all
   end
@@ -13,6 +16,7 @@ class MessagesController < ApplicationController
   
   def create
     @message = Message.new(message_params)
+    @message.user = current_user
     if @message.save
       redirect_to messages_path
     else
@@ -32,6 +36,19 @@ class MessagesController < ApplicationController
       render :edit
     end
   end
+
+  def destroy
+    @message = Message.find(params[:id])
+    @message.destroy
+
+    respond_to do |format|
+      format.html { redirect_to messages_path, notice: "Mensaje eliminado correctamente." }
+      format.turbo_stream
+    end
+  end
+
+
+
 
   private
   def message_params

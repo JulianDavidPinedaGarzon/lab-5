@@ -1,21 +1,18 @@
-<h1>All Messages</h1>
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Chat ID</th>
-    <th>User ID</th>
-    <th>Body</th>
-    <th>Actions</th>
-  </tr>
-  <% @messages.each do |msg| %>
-    <tr>
-      <td><%= msg.id %></td>
-      <td><%= msg.chat_id %></td>
-      <td><%= msg.user_id %></td>
-      <td><%= msg.body %></td>
-      <td><%= link_to "View", message_path(msg) %></td>
-      <td><%= link_to 'Editar', edit_message_path(msg) %></td>
-    </tr>
-  <% end %>
-</table>
+<h1>Mensajes</h1>
+
+<%= link_to 'Nuevo mensaje', new_message_path if can? :create, Message %>
+
+
+<% @messages.each do |msg| %>
+  <ul>
+    <% if can? :edit, msg %>
+      <%= msg.body %>
+      <%= link_to 'Ver', message_path(msg) %>
+    <% end %>
+
+    <% if can? :destroy, msg %>
+      | <%= button_to 'Eliminar', message_path(msg), method: :delete, data: { confirm: "¿Seguro que quieres eliminar este mensaje?" } %>
+    <% end %>
+  </ul>
+<% end %>
 

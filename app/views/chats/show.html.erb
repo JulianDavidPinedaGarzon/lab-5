@@ -1,14 +1,25 @@
 <h1>Chat #<%= @chat.id %></h1>
 
-<p>Remitente: <%= "#{@chat.sender.first_name} #{@chat.sender.last_name}" %></p>
-<p>Receptor: <%= "#{@chat.receiver.first_name} #{@chat.receiver.last_name}" %></p>
+<p>Remitente: <%= @chat.sender.first_name %> <%= @chat.sender.last_name %></p>
+<p>Receptor: <%= @chat.receiver.first_name %> <%= @chat.receiver.last_name %></p>
 
-
-<h2>Mensajes</h2>
+<h2>Mensajes:</h2>
 <ul>
   <% @chat.messages.each do |msg| %>
-    <li><%= "#{msg.user.first_name} #{msg.user.last_name}" %>: <%= msg.body %></li>
+    <li>
+      <%= msg.user.first_name %> <%= msg.user.last_name %>: <%= msg.body %>
+
+      <% if can? :edit, msg %>
+        | <%= link_to 'Editar', edit_chat_message_path(@chat, msg) %>
+      <% end %>
+
+      <% if can? :destroy, msg %>
+        | <%= link_to 'Eliminar', chat_message_path(@chat, msg), method: :delete, data: { confirm: '¿Seguro?' } %>
+      <% end %>
+    </li>
   <% end %>
 </ul>
 
-<%= link_to 'Editar', edit_chat_path(@chat) %>
+<% if can? :create, Message %>
+  <%= link_to 'Nuevo mensaje', new_chat_message_path(@chat) %>
+<% end %>

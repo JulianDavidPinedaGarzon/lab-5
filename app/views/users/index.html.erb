@@ -16,9 +16,9 @@
       <td><%= user.last_name %></td>
       <td><%= link_to "View", user_path(user) %></td>
       <td><%= user.messages.count %></td>
-      <td><%= link_to 'Editar', edit_user_path(user) %></td>
+      <% if can? :edit, user %>
+       <td><%= link_to 'Editar', edit_user_path(user) %></td>
+      <% end %>
     </tr>
   <% end %>
 </table>
-
-<%= link_to "Add new user", new_user_path %>

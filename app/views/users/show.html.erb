@@ -1,18 +1,7 @@
-<h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
+<h1><%= @user.first_name %> <%= @user.last_name %></h1>
+
 <p>Email: <%= @user.email %></p>
 
-<h2>Chats</h2>
-<ul>
-  <% @user.sent_chats.each do |chat| %>
-    <li><%= link_to "Chat ##{chat.id}", chat_path(chat) %></li>
-  <% end %>
-</ul>
-
-<h2>Mensajes</h2>
-<ul>
-  <% @user.messages.each do |message| %>
-    <li><%= message.body %> en <%= link_to "Chat", chat_path(message.chat) %></li>
-  <% end %>
-</ul>
-
-<%= link_to 'Editar', edit_user_path(@user) %>
+<% if can? :edit, @user %>
+  <%= link_to 'Editar perfil', edit_user_path(@user) %>
+<% end %>

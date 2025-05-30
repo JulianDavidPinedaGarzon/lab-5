@@ -1,6 +1,14 @@
 <h1>Mensaje</h1>
-<p>Usuario: <%= @message.user.email %></p>
-<p>Chat: <%= link_to "Chat ##{@message.chat.id}", chat_path(@message.chat) %></p>
-<p>Contenido: <%= @message.body %></p>
 
-<%= link_to 'Editar', edit_message_path(@message) %>
+<% if @message.user_id == current_user.id || @message.chat.users.include?(current_user) %> 
+
+  <% if can? :edit, @message %>
+    <p><%= @message.body %> <%= link_to 'Editar', edit_message_path(@message) %></p>
+  <% end %>
+<% end %>
+
+
+
+
+
+<%= link_to 'Volver a mensajes', messages_path %>
