@@ -25,6 +25,9 @@
       Bienvenido <%= current_user.first_name %>  <%= current_user.last_name %>
       <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
     </p>
+    <p>
+      <%= link_to "My Inbox", chats_path %>
+    </p>
   <% else %>
     <p>
       <%= link_to 'Sign In', new_user_session_path %> |

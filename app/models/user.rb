@@ -13,5 +13,13 @@ class User < ApplicationRecord
     validates :email, presence: true, uniqueness: true
     validates :first_name, presence: true
     validates :last_name, presence: true
+
+    def full_name
+    # Adjust based on your User model attributes, e.g., first_name, last_name, or just name
+    "#{first_name} #{last_name}".strip # Example for first_name and last_name
+    # If you only have a 'name' attribute:
+    # name
+  end
+
   end
   

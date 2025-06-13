@@ -1,9 +1,9 @@
 class ChatsController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource
+  authorize_resource
   
   def index
-    @chats = Chat.all
+    @chats = Chat.involving(curren_user).includes(:sender, :receiver)
   end
 
   def show

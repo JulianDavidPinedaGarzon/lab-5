@@ -1,22 +1,19 @@
-<h1>All Chats</h1>
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Sender ID</th>
-    <th>Receiver ID</th>
-    <th>Actions</th>
-  </tr>
-  <% @chats.each do |chat| %>
-    <tr>
-      <td><%= chat.id %></td>
-      <td><%= chat.sender_id %></td>
-      <td><%= chat.receiver_id %></td>
-      <% if can? :edit, chat %>
-        <td><%= link_to "View", chat_path(chat) %></td>
-        <td><%= link_to 'Editar', edit_chat_message_path(@chat, msg) %></td>
-      <% end %>
-      
-    </tr>
-  <% end %>
-</table>
+<h1>My Inbox</h1>
 
+<% if @chats.any? %>
+  <ul>
+    <% @chats.each do |chat| %>
+      <li>
+        Conversation with:
+        <% other_user = chat.other_participant(current_user) %>
+        <% if other_user %>
+          <%= link_to other_user.full_name, chat_path(chat) %> <%# Or simply: <%= other_user.full_name %>
+        <% else %>
+          (Participant not found)
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You have no chats yet.</p>
+<% end %>
